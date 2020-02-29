@@ -142,8 +142,6 @@ GameOfLife.prototype.draw = function () {
 
 
 GameOfLife.prototype.update = function () {
-  this.time++;
-  if (this.time % 10 === 0){
     let next = make2DArray(this.cols, this.rows);
     for (let i = 0; i < this.cols; i++) {
       for (let j = 0; j < this.rows; j++) {
@@ -160,8 +158,6 @@ GameOfLife.prototype.update = function () {
       }
     }
     this.grid = next;
-  }
-
 }
 
 function make2DArray(cols, rows) {

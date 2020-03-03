@@ -3,7 +3,7 @@
 // Game of Life
 
 var AM = new AssetManager();
-
+var clickedButton = null;
 
 // no inheritance
 function Background(game) {
@@ -30,12 +30,11 @@ function GameOfLife(game,width, height) {
 	this.rows = this.height/ this.resolution;
 	
   this.grid = make2DArray(this.cols, this.rows);
-  this.grid = patterns(this.grid, this.cols, this.rows);
+  this.grid = random(this.grid, this.cols, this.rows);
   console.table(this.grid);
 	this.game = game;
   this.ctx = game.ctx;
   this.time = 0;
-	
 }
 
 function random(grid, cols, rows){
@@ -46,12 +45,12 @@ function random(grid, cols, rows){
   }
   return grid;
 }
-function patterns (grid, cols, rows){
+function gliderGun (grid, cols, rows){
 for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
       // glider gun
-        if ((i === 1 && j === 5) ||  (i === 2 && j === 5) ||  (i === 1 && j === 6)
-            ||  (i === 2 && j === 6)
+        if ((i === 1 && j === 5)  ||  (i === 1 && j === 6)
+            || (i === 2 && j === 5) || (i === 2 && j === 6)
 
             ||  (i === 11 && j === 5) ||  (i === 11 && j === 6)||  (i === 11 && j === 7)
             ||  (i === 12 && j === 4) ||  (i === 12 && j === 8)
@@ -70,50 +69,6 @@ for (let i = 0; i < cols; i++) {
             ||  (i === 35 && j === 3) ||  (i === 35 && j === 4)
             ||  (i === 36 && j === 3) ||  (i === 36 && j === 4) 
 
-
-            ||(i === 54 && j === 44) || (i === 54 && j === 45) || (i === 54 && j === 46) || (i === 53 && j === 45)
-
-            || (i === 60 && j === 44) || (i === 60 && j === 45) || (i === 60 && j === 46) || (i === 60 && j === 45)
-
-            // unbound
-            || (i === 4 && j === 44) || (i === 4 && j === 45) || (i === 4 && j === 46) || (i === 4 && j === 48)
-            || (i === 5 && j === 44) 
-            || (i === 6 && j === 47) || (i === 6 && j === 48)
-            || (i === 7 && j === 45) || (i === 7 && j === 46) || (i === 7 && j === 48)
-            || (i === 8 && j === 44) || (i === 8 && j === 46) || (i === 8 && j === 48)
-
-            // block_switch_engine
-            ||  (i === 64 && j === 10)
-            ||  (i === 65 && j === 8) || (i === 65 && j === 10) || (i === 65 && j === 11) 
-            ||  (i === 66 && j === 8) || (i === 66 && j === 10) 
-            ||  (i === 67 && j === 8)
-            ||  (i === 68 && j === 6)
-            ||  (i === 69 && j === 4) ||  (i === 69 && j === 6)
-
-            // spaceship
-            || (i === 4 && j === 16) || (i === 4 && j === 17) 
-            || (i === 5 && j === 14) || (i === 5 && j === 15) || (i === 5 && j === 17) || (i === 5 && j === 18) 
-            || (i === 6 && j === 14) || (i === 6 && j === 15) || (i === 6 && j === 16) || (i === 6 && j === 17)
-            || (i === 7 && j === 15) || (i === 7 && j === 16)
-
-            // diehard
-            || (i === 34 && j === 40) 
-            || (i === 35 && j === 34) || (i === 35 && j === 35) 
-            || (i === 36 && j === 35) || (i === 36 && j === 39) || (i === 36 && j === 40) || (i === 36 && j === 41)
-
-
-            // spaceship
-            || (i === 44 && j === 56) || (i === 44 && j === 57) 
-            || (i === 45 && j === 54) || (i === 45 && j === 55) || (i === 45 && j === 57) || (i === 45 && j === 58) 
-            || (i === 46 && j === 54) || (i === 46 && j === 55) || (i === 46 && j === 56) || (i === 46 && j === 57)
-            || (i === 47 && j === 55) || (i === 47 && j === 56)
-            //      unbound       
-            || (i === 54 && j === 44) || (i === 54 && j === 45) || (i === 54 && j === 46) || (i === 54 && j === 48)
-            || (i === 55 && j === 44) 
-            || (i === 56 && j === 47) || (i === 56 && j === 48)
-            || (i === 57 && j === 45) || (i === 57 && j === 46) || (i === 57 && j === 48)
-            || (i === 58 && j === 44) || (i === 58 && j === 46) || (i === 58 && j === 48)
-
             ) {
           grid[i][j] = 1;
 
@@ -125,6 +80,46 @@ for (let i = 0; i < cols; i++) {
 
   return grid;
 }
+function spaceShip (grid, cols, rows){
+  for (let i = 0; i < cols; i++) {
+      for (let j = 0; j < rows; j++) {
+ 
+          if ((i === 4 && j === 36) || (i === 4 && j === 37) 
+          || (i === 5 && j === 34) || (i === 5 && j === 35) || (i === 5 && j === 37) || (i === 5 && j === 38) 
+          || (i === 6 && j === 34) || (i === 6 && j === 35) || (i === 6 && j === 36) || (i === 6 && j === 37)
+          || (i === 7 && j === 35) || (i === 7 && j === 36) ||
+              
+          
+          (i === 44 && j === 36) || (i === 44 && j === 37) 
+          || (i === 45 && j === 34) || (i === 45 && j === 35) || (i === 45 && j === 37) || (i === 45 && j === 38) 
+          || (i === 46 && j === 34) || (i === 46 && j === 35) || (i === 46 && j === 36) || (i === 46 && j === 37)
+          || (i === 47 && j === 35) || (i === 47 && j === 36)
+              
+          ||
+              
+          
+          (i === 24 && j === 36) || (i === 24 && j === 37) 
+          || (i === 25 && j === 34) || (i === 25 && j === 35) || (i === 25 && j === 37) || (i === 25 && j === 38) 
+          || (i === 26 && j === 34) || (i === 26 && j === 35) || (i === 26 && j === 36) || (i === 26 && j === 37)
+          || (i === 27 && j === 35) || (i === 27 && j === 36)
+          
+          ||
+          (i === 64 && j === 36) || (i === 64 && j === 37) 
+          || (i === 65 && j === 34) || (i === 65 && j === 35) || (i === 65 && j === 37) || (i === 65 && j === 38) 
+          || (i === 66 && j === 34) || (i === 66 && j === 35) || (i === 66 && j === 36) || (i === 66 && j === 37)
+          || (i === 67 && j === 35) || (i === 67 && j === 36)
+
+          ) {
+            grid[i][j] = 1;
+  
+          } else {
+              grid[i][j] = 0;
+          }
+        }
+      }
+  
+    return grid;
+  }
 
 GameOfLife.prototype.draw = function () {
 	for (let i = 0; i < this.cols; i++) {
@@ -142,6 +137,8 @@ GameOfLife.prototype.draw = function () {
 
 
 GameOfLife.prototype.update = function () {
+  //debugger
+    //console.log(this.clicked)
     let next = make2DArray(this.cols, this.rows);
     for (let i = 0; i < this.cols; i++) {
       for (let j = 0; j < this.rows; j++) {
@@ -158,7 +155,33 @@ GameOfLife.prototype.update = function () {
       }
     }
     this.grid = next;
+
+    document.getElementById('randomButton').onclick = function() {
+      clickedButton = "random"
+    }
+    document.getElementById('gliderGunButton').onclick = function() {
+      clickedButton = "gliderGun"
+    }
+    document.getElementById('spaceShipButton').onclick = function() {
+      clickedButton = "spaceShip"
+    }
+
+    if (clickedButton === "random"){
+      this.grid = make2DArray(this.cols, this.rows);
+      this.grid = random(this.grid, this.cols, this.rows);
+      clickedButton = null;
+      
+    } else if (clickedButton === "gliderGun"){
+      this.grid = make2DArray(this.cols, this.rows);
+      this.grid = gliderGun(this.grid, this.cols, this.rows);
+      clickedButton = null;
+    } else if (clickedButton === "spaceShip"){
+      this.grid = make2DArray(this.cols, this.rows);
+      this.grid = spaceShip(this.grid, this.cols, this.rows);
+      clickedButton = null;
+    }
 }
+
 
 function make2DArray(cols, rows) {
 	let arr = new Array(cols);

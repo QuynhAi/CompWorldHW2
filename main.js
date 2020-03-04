@@ -121,6 +121,30 @@ function spaceShip (grid, cols, rows){
     return grid;
   }
 
+
+  function pattern (grid, cols, rows){
+      for (let i = 0; i < cols; i++) {
+          for (let j = 0; j < rows; j++) {
+     
+              if ((i === 24 && j === 36) || (i === 24 && j === 37) || (i === 24 && j === 38)
+                  || (i === 25 && j === 36) ||                      (i === 25 && j === 38)      
+                  || (i === 26 && j === 36) ||(i === 26 && j === 37) || (i === 26 && j === 38)
+                  ||
+                  (i === 28 && j === 36) || (i === 28 && j === 37) || (i === 28 && j === 38)
+                  || (i === 29 && j === 36) ||                      (i === 29 && j === 38)      
+                  || (i === 30 && j === 36) ||(i === 30 && j === 37) || (i === 30 && j === 38)) {
+                grid[i][j] = 1;
+      
+              } else {
+                  grid[i][j] = 0;
+              }
+            }
+          }
+        console.table(grid)
+        debugger
+        return grid;
+}
+
 GameOfLife.prototype.draw = function () {
 	for (let i = 0; i < this.cols; i++) {
 		for (let j = 0; j < this.rows; j++) {
@@ -165,6 +189,9 @@ GameOfLife.prototype.update = function () {
     document.getElementById('spaceShipButton').onclick = function() {
       clickedButton = "spaceShip"
     }
+    document.getElementById('patternButton').onclick = function() {
+      clickedButton = "pattern"
+    }
 
     if (clickedButton === "random"){
       this.grid = make2DArray(this.cols, this.rows);
@@ -178,6 +205,10 @@ GameOfLife.prototype.update = function () {
     } else if (clickedButton === "spaceShip"){
       this.grid = make2DArray(this.cols, this.rows);
       this.grid = spaceShip(this.grid, this.cols, this.rows);
+      clickedButton = null;
+    } else if (clickedButton === "pattern"){
+      this.grid = make2DArray(this.cols, this.rows);
+      this.grid = pattern(this.grid, this.cols, this.rows);
       clickedButton = null;
     }
 }

@@ -122,7 +122,7 @@ function spaceShip (grid, cols, rows){
   }
 
 
-  function pattern (grid, cols, rows){
+function pattern (grid, cols, rows){
       for (let i = 0; i < cols; i++) {
           for (let j = 0; j < rows; j++) {
      
